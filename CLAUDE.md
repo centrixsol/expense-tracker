@@ -15,13 +15,17 @@ No test suite is configured.
 
 ## Architecture
 
-This is a React 19 + Vite app. The entire application lives in a single component: `src/App.jsx`.
+This is a React 19 + Vite app with no external state management, routing, or backend — all data is in-memory and resets on page reload.
 
-`App` holds all state: the `transactions` array plus form inputs (`description`, `amount`, `type`, `category`) and filter state (`filterType`, `filterCategory`). There is no external state management, routing, or backend — all data is in-memory and resets on page reload.
+`App` owns the single source of truth: the `transactions` array. It passes data down to three child components:
 
-**Known intentional issues (course material — fix as instructed):**
-- `amount` is stored as a string, so `reduce` does string concatenation instead of addition, breaking the Income/Expenses/Balance summary totals.
+- `Summary` — calculates and displays total income, expenses, and balance from `transactions`
+- `TransactionForm` — manages its own form field state; calls `onAdd(transaction)` prop on submit; converts `amount` to a number before passing it up
+- `TransactionList` — manages its own filter state (`filterType`, `filterCategory`); derives the filtered list internally from the `transactions` prop
+
+The `categories` array is defined locally in both `TransactionForm` and `TransactionList` (not shared via a module yet).
+
+**Known intentional issue (course material):**
 - "Freelance Work" is seeded as `type: "expense"` instead of `"income"`.
-- The UI is intentionally plain and the code is intentionally monolithic — refactoring into components is part of the course exercises.
 
 `App.css` contains a `.delete-btn` style that has no corresponding button in the JSX yet — it's pre-staged for a delete feature to be added.
