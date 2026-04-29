@@ -22,8 +22,19 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Finance Tracker</h1>
-      <p className="subtitle">Track your income and expenses</p>
+      <header className="app-header">
+        <div className="app-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" strokeWidth="0" fill="rgba(255,255,255,0.15)"/>
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div className="app-header-text">
+          <h1>Finance Tracker</h1>
+          <p className="subtitle">Track your income and expenses</p>
+        </div>
+      </header>
 
       <Summary transactions={transactions} />
       <TransactionForm onAdd={handleAdd} />
